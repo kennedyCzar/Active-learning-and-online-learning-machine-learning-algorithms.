@@ -24,13 +24,17 @@ class loss:
         return 1/(1  + np.exp(-(np.dot(X, beta))))
     
     @staticmethod
-    def hinge(X, y, beta, b):
+    def hinge(X, y, beta, b = None):
         '''
         Hinge loss function
         is used for Support vector machines (SVM)
         :params: X: traing data at ith iteration
         :return: 0 or max margin
         '''
+        if not b:
+            b = 0
+        else:
+            b = b
         return np.maximum(0, 1 - y*(np.dot(X, beta) + b))
     
     @staticmethod
