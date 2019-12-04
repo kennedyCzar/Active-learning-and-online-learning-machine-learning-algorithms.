@@ -132,7 +132,7 @@ class kernelactive(EvalC, Kernels, loss, tau):
         '''
         self.X = X
         if not delta:
-            delta = 100
+            delta = 10
             self.delta = delta
         else:
             self.delta
@@ -159,10 +159,9 @@ class kernelactive(EvalC, Kernels, loss, tau):
     
 #%% Testing
         
-kactive = kernelactive(kernel = 'linrbf').fit(X_train, Y_train)
-#psaggr.predict(X_test)
-plt.scatter(X_test[:, 0], X_test[:, 1], c = kactive.predict(X_test))
-
+#kactive = kernelactive(kernel = 'rbf').fit(X_train, Y_train)
+##psaggr.predict(X_test)
+#plt.scatter(X_test[:, 0], X_test[:, 1], c = kactive.predict(X_test), s = 1, cmap = color)
 
 
 
