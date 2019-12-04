@@ -35,7 +35,7 @@ class EvalC:
     @staticmethod
     def TP(A, P):
         '''Docstring
-        when actual is 1 and prediction is -1
+        when actual is 1 and prediction is 1
         
         :params: A: Actual label
         :params: P: predicted labels
