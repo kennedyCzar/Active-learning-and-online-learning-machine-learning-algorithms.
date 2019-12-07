@@ -17,6 +17,11 @@ from sklearn.metrics import roc_curve, auc, roc_auc_score
 from libsvm import libSVM
 path = '/home/kenneth/Documents/MLDM M2/ADVANCE_ML/Active-learning-and-online-learning-machine-learning-algorithms./DATASET'
 color = 'coolwarm_r'
+np.random.seed(1000)
+plt.rcParams.update({'font.size': 8})
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+plt.rcParams['figure.dpi'] = 200
 
 def removeInt(df):
     '''
@@ -50,11 +55,26 @@ y.index = np.arange(y.shape[0])
 combine = np.array(combine)
 y = np.array(y)
 #%%
+
 plt.scatter(train_x.iloc[:, 0], train_x.iloc[:, 1], s = 1, c = train_y, cmap = 'coolwarm_r')
 plt.scatter(test_x.iloc[:, 0], test_x.iloc[:, 1], s = 1, c = test_y, cmap = 'coolwarm_r')
 plt.scatter(val_x.iloc[:, 0], val_x.iloc[:, 1], s = 1, c = val_y, cmap = 'coolwarm_r')
-#combined dataset
+
 plt.scatter(combine[:, 0], combine[:, 1], s = 1, c = y, cmap = 'coolwarm_r')
+#%% Combine training and test data plot
+fig, ax = plt.subplots(2, 1, gridspec_kw = dict(hspace = 0, wspace = 0),
+                       subplot_kw={'xticks':[], 'yticks':[]})
+ax[0].scatter(combine[:, 0], combine[:, 1], s = .5, c = y, cmap = 'coolwarm_r', label = 'Training data')
+ax[1].scatter(test_x.iloc[:, 0], test_x.iloc[:, 1], s = .5, c = test_y, cmap = 'coolwarm_r', label = 'Test data')
+
+ax[0].set_title('Traing data and Test Data')
+ax[0].set_ylabel('Load')
+ax[1].set_ylabel('Load')
+ax[0].set_xlabel('RPM')
+ax[1].set_xlabel('RPM')
+ax[0].legend()
+ax[1].legend()
+fig.set_tight_layout(True)
 #%% Training
 start = time.time() #start time
 psaggr = passiveAggr(tau_update = 'classic').fit(np.array(combine), y)
