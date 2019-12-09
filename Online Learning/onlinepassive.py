@@ -74,7 +74,7 @@ class passiveAggr(EvalC, Kernels, loss, tau):
         for ij, (x_i, y_i) in enumerate(zip(X, Y)):
             self.pred[ij] = self.pred_update(x_i, self.beta)
             self.l_t = passiveAggr.activation(x_i, y_i, self.beta)
-            print(f'Cost of computation/Loss: {self.cost(x_i, y_i, self.beta)}')
+#            print(f'Cost of computation/Loss: {self.cost(x_i, y_i, self.beta)}')
             self.t_t = self.updatetau(x_i, self.l_t)
             if self.pred[ij] != y_i:
                 self.beta = self.beta + self.t_t * y_i * x_i
