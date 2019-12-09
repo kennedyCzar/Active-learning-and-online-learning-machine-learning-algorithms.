@@ -15,7 +15,7 @@ from sklearn.svm import SVC
 
 class libSVM(Kernels, EvalC, loss, tau):
     def __init__(self, kernell = None, C = None):
-        '''
+        '''LibSVM wrapper
         :param:
             :kernel: kernel. default is linear
             :C: penalty. Default is 0.1
