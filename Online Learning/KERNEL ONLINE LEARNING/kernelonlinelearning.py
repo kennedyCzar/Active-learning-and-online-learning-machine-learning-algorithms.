@@ -302,7 +302,7 @@ class kernelpassiveAggr_v2(EvalC, Kernels, loss, tau):
         '''
         param: X_test = NxD feature matrix
         '''
-        return np.sign(np.dot(self.alpha, self.kernelize(self.X, X)))
+        return np.sign(np.dot(self.alpha, self.kernelize(self.s_t, X)))
     
     
 #%% Testing
