@@ -138,6 +138,7 @@ class kernelactive(EvalC, Kernels, loss, tau):
             self.delta
         self.alpha = np.random.randn(X.shape[0])
         self.pred = np.zeros(len(Y))
+        self.s_t = [] #store support set
         for ij, (x_i, y_i) in enumerate(zip(self.X, Y)):
             self.pred[ij] = self.pred_update(x_i, self.alpha[ij])
             self.z_t = self.binom(self.delta, np.absolute(self.pred[ij]))
@@ -147,8 +148,11 @@ class kernelactive(EvalC, Kernels, loss, tau):
                     print(f'Cost of computation: {self.l_t}')
                     self.t_t = self.classictau(x_i, self.l_t)
                     self.alpha[ij] = self.alpha[ij] + self.t_t * y_i * self.kernelize(x_i, x_i)
+                    self.s_t.append(x_i)
                 else:
                     self.alpha[ij] = self.alpha[ij]
+        self.s_t = np.array(self.s_t) #support set
+        self.alpha = self.alpha[: len(self.s_t)] #support set hypothesis
         return self
     
     def predict(self, X):
