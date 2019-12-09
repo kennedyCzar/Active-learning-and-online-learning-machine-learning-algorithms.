@@ -60,7 +60,10 @@ class EvalC:
         :params: A: Actual label
         :params: P: predicted labels
         '''
-        return np.sum((A == 1) & (P == -1))
+        if np.sum((A == 1) & (P == -1)) == np.inf:
+            return 0
+        else:
+            return np.sum((A == 1) & (P == -1))
     
     @staticmethod
     def TN(A, P):
@@ -70,7 +73,10 @@ class EvalC:
         :params: A: Actual label
         :params: P: predicted labels
         '''
-        return np.sum((A == -1) & (P == -1))
+        if np.sum((A == -1) & (P == -1)) == np.inf:
+            return 0
+        else:
+            return np.sum((A == -1) & (P == -1))
     
     @staticmethod
     def confusionMatrix(A, P):
