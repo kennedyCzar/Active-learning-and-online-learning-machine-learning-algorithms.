@@ -75,10 +75,10 @@ class activelearning(EvalC, Kernels, loss, tau):
         :params: alpha: learning rate
         '''
         if not delta:
-            delta = 100
+            delta = 1
             self.delta = delta
         else:
-            self.delta
+            self.delta = delta
         self.beta = np.zeros(X.shape[1])
         self.pred = np.zeros(len(Y))
         self.counter = 0
@@ -88,7 +88,7 @@ class activelearning(EvalC, Kernels, loss, tau):
             if self.z_t == 1:
                  if self.pred[ij] != y_i:
                      self.l_t = activelearning.activation(x_i, y_i, self.beta)
-                     print(f'Cost of computation: {self.l_t}')
+#                     print(f'Cost of computation: {self.l_t}')
                      self.t_t = self.updatetau(x_i, self.l_t)
                      self.beta = self.beta + self.t_t * y_i * x_i
                      self.counter +=1
